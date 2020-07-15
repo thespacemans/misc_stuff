@@ -1,2 +1,2 @@
 # misc_stuff
-An easy place for all my little projects
+An centralized location for all my little projects
