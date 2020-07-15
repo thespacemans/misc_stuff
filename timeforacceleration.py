@@ -2,17 +2,16 @@
 import sys
 import math
 
-# define main body as function
-# might need to change arg syntax !
-def main(iter, alt):
-    # initialize variables
+# Globals
+# earth radius in meters (6.37 million)
+r_earth = 6370000
+# speed of light in m/s
+c_speed = 299792458
+# constant in meters per second, squared
+grav_const = 9.80665
 
-#    try:
-#       iter = float(argv[1]) # iterator as a fraction of a meter
-#       alt = float(argv[2]) * 1000 # desired altitude(km) convert to meters
-#    except NameError:
-#        iter = float(input("Iterator: "))
-#        alt = float(input("Altitude: ")) * 1000
+
+def main(iter, alt):
 
     # cast arguments to floats to avoid bugs
     alt = float(alt) * 1000 # convert kilometers to meters
@@ -21,9 +20,8 @@ def main(iter, alt):
     inc_count = 0 # iteration counter for debugging
 
     alt_inc = alt # assign total altitude to counter variable
-    r_earth = 6370000 # earth radius in meters (6.37 million)
 
-    grav_const = 9.80665 # constant in meters per second, squared
+
     # initialize changing gravity variable
     grav_new = grav_const * math.pow((r_earth / (r_earth + alt_inc)), 2)
     grav_new = round(grav_new, 4)
@@ -31,7 +29,6 @@ def main(iter, alt):
     time_inc = 0 # time increment in fractions of seconds
     time_total = 0 # time totaled from increments
 
-    c_speed = 299792458 # speed of light in m/s
 
     vel_total = 0 # total velocity summed from acceleration operations
 
@@ -61,7 +58,7 @@ def main(iter, alt):
 
         vel_total += (grav_new * time_inc)
         inc_count += 1
-    
+
     print("Altitude: ", alt, "m | ", "Iterator: ", iter, " m")
     # divide by 60s and 60m to get hours
     print("Time (hrs): ", round((time_total / 3600), 2), " hrs")
