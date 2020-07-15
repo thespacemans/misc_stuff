@@ -11,6 +11,12 @@ c_speed = 299792458
 grav_const = 9.80665
 
 
+def calcGravity(alt_inc):
+    grav_new = grav_const * math.pow((r_earth / (r_earth + alt_inc)), 2)
+    grav_new = round(grav_new, 4)
+    return grav_new
+
+
 def main(iter, alt):
 
     # cast arguments to floats to avoid bugs
@@ -21,10 +27,7 @@ def main(iter, alt):
 
     alt_inc = alt # assign total altitude to counter variable
 
-
-    # initialize changing gravity variable
-    grav_new = grav_const * math.pow((r_earth / (r_earth + alt_inc)), 2)
-    grav_new = round(grav_new, 4)
+    grav_new = calcGravity(alt_inc)
 
     time_inc = 0 # time increment in fractions of seconds
     time_total = 0 # time totaled from increments
@@ -54,7 +57,7 @@ def main(iter, alt):
         alt_inc = alt_inc - iter
 
         # re-evaluate gravity at new altitude
-        grav_new = grav_const * math.pow((r_earth / (r_earth + alt_inc)), 2)
+        grav_new = calcGravity(alt_inc)
 
         vel_total += (grav_new * time_inc)
         inc_count += 1
