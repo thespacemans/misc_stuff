@@ -25,6 +25,7 @@ def dataInit(alt, iter):
     time_incr = time_total
     vel_total = Decimal(0)
     vel_incr = vel_total
+    iter = int(iter)
     data = [alt, alt_incr, grav_constant, grav_new, time_total, time_incr, vel_total, vel_incr, iter]
         # 0 alt
         # 1 alt_incr
@@ -44,6 +45,7 @@ def calcGravity(gStore):
 
 def calcTime(tStore):
     # tStore[5] = -1 * (math.sqrt((2 * tStore[8] * tStore[3]) + (tStore[7] ** 2) + tStore[7]) / tStore[3])
+    import pdb; pdb.set_trace()
 
     tStore[5] = tStore[8] * tStore[3]
     tStore[5] *= 2
