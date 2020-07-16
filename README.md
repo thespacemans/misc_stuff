@@ -1,2 +1,2 @@
 # misc_stuff
-An centralized location for all my little projects
+Centralized repository for sundry project files and ideas
