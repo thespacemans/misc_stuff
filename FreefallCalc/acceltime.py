@@ -33,6 +33,7 @@ def PrintOut(altitude, iterator, time, velocity, loops):
 # calculate gravity at new altitude
 def CalculateGravity(altitude):
     gravity = gravity_const * math.pow((radius_earth / (radius_earth + altitude)), 2)
+    gravity *= 0.5 # fraction of total gravity
     return gravity
     # gnew = g(re/re+h)^2
 
