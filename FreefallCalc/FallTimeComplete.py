@@ -120,7 +120,15 @@ def main(altitude, iterator):
 
         loop_count += 1
 
-        if (loop_count % 1000 == 0):
+        modulo = 1000
+        if iterator == 0.1:
+            modulo = 10000
+        elif iterator == 0.01:
+            modulo = 100000
+        elif iterator == 0.001:
+            modulo = 10000000
+
+        if (loop_count % modulo == 0):
             clear()
             print("Velocity: ", velocity_counter)
             print("Terminal: ", terminal_velocity)
