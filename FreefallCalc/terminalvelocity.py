@@ -1,10 +1,12 @@
-import sys
 import math
 
 # define globals
 mass = 361779338 # in kilograms
 cross_area = 86987.4 # in meters^2
-drag_coeff = 1.42 # of hemisphere opposite flow
+# drag_coeff = 1.42 # semispehere opposite flow
+drag_coeff = 2.1 # rectangular box
+gravity_constant = float(9.80665)
+
 
 term_vel = 0
 density_value = 0
@@ -14,7 +16,7 @@ altitude_density = [[80000, 1.846e-05], [70000, 8.283e-05], [60000, 0.0003097], 
 
 def FindTerminal(gravity, density):
     # import pdb; pdb.set_trace()
-    terminal_velocity = math.sqrt((2 * mass * gravity)/(density * cross_area * drag_coeff))
+    terminal_velocity = math.sqrt((2 * mass * gravity_constant)/(density * cross_area * drag_coeff))
     return terminal_velocity
 
 def main(alt_input, grav_input):

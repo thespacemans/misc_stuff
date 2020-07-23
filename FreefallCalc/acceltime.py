@@ -27,7 +27,6 @@ def PrintOut(altitude, iterator, time, velocity, loops):
 # calculate gravity at new altitude
 def CalculateGravity(altitude):
     gravity = gravity_const * math.pow((radius_earth / (radius_earth + altitude)), 2)
-    gravity *= 0.25 # fraction of total gravity
     return gravity
     # gnew = g(re/re+h)^2
 
@@ -71,14 +70,15 @@ def main(altitude, iterator):
         velocity_counter += CalculateVelocity(time_counter, gravity_new)
         terminal = TerminalV.main(alt_counter, gravity_new)
         # define terminal velocity here
-        if velocity_counter > terminal:
+        if velocity_counter > terminal: # if velocity would exceed terminal
             velocity_counter = terminal
 
         gravity_new = CalculateGravity(alt_counter)
+        gravity_new *= 0.5 # use fraction of total gravity
 
         loop_count += 1
 
-        if (loop_count % 10000 == 0):
+        if (loop_count % 1000 == 0):
             clear()
             print("Velocity: ", velocity_counter)
             print("Terminal: ", terminal)
