@@ -5,8 +5,6 @@ import math
 mass = 361779338 # in kilograms
 cross_area = 86987.4 # in meters^2
 drag_coeff = 1.42 # of hemisphere opposite flow
-radius_earth = float(6370000) # earth radius in meters (6.37 million)
-gravity_const = float(9.80665) # constant in meters per second, squared
 
 term_vel = 0
 density_value = 0
@@ -15,16 +13,12 @@ altitude_density = [[80000, 1.846e-05], [70000, 8.283e-05], [60000, 0.0003097], 
 # in meters and kg/m^3
 
 def FindTerminal(gravity, density):
+    # import pdb; pdb.set_trace()
     terminal_velocity = math.sqrt((2 * mass * gravity)/(density * cross_area * drag_coeff))
     return terminal_velocity
 
-def CalcGravityStuff(altitude):
-    gravity = gravity_const * math.pow((radius_earth / (radius_earth + altitude)), 2)
-    return gravity
-
-def main(alt_input):
-    gravity_new = CalcGravityStuff(alt_input)
-
+def main(alt_input, grav_input):
+    density_value = altitude_density[len(altitude_density) - 1][1]
     for r in range(0, len(altitude_density) - 1):
         if alt_input < altitude_density[r][0] and alt_input >= altitude_density[r+1][0]:
             density_value = altitude_density[r+1][1]
@@ -33,8 +27,9 @@ def main(alt_input):
             density_value = altitude_density[0][1] # set it to lowest possible value
             break
 
-    term_vel = FindTerminal(gravity_new, density_value)
-    print(term_vel)
+    # import pdb; pdb.set_trace()
+
+    term_vel = FindTerminal(grav_input, density_value)
     return term_vel
 
 # main(500)

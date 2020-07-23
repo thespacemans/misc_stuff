@@ -1,6 +1,7 @@
 import sys
 import math
 from os import system, name
+import terminalvelocity as TerminalV
 
 # initialize globals
 # earth radius in meters (6.37 million)
@@ -21,19 +22,12 @@ def clear():
 
 # print func here
 def PrintOut(altitude, iterator, time, velocity, loops):
-    print("")
-    print("      Altitude: ", altitude, " m")
-    print("      Iterator: ", iterator, " m")
-    print("  Time elapsed: ", round(time, 8), " seconds")
-    print("--------------| ", round((time / 3600.0), 3), " hours")
-    print("Final velocity: ", round(velocity, 8), " m/s")
-    print("--------------| ", round(100 * (velocity / lightspeed), 2), "% of c")
-    print("    Loop count: ", loops)
+    print("", "\n", "      Altitude: ", altitude, " m", "\n", "      Iterator: ", iterator, " m", "\n", "  Time elapsed: ", round(time, 8), " seconds", "\n", "--------------| ", round((time / 3600.0), 3), " hours", "\n", "Final velocity: ", round(velocity, 8), " m/s", "\n", "--------------| ", round(100 * (velocity / lightspeed), 2), "% of c", "\n", "    Loop count: ", loops)
 
 # calculate gravity at new altitude
 def CalculateGravity(altitude):
     gravity = gravity_const * math.pow((radius_earth / (radius_earth + altitude)), 2)
-    gravity *= 0.5 # fraction of total gravity
+    gravity *= 0.25 # fraction of total gravity
     return gravity
     # gnew = g(re/re+h)^2
 
@@ -41,12 +35,6 @@ def CalculateGravity(altitude):
 def CalculateVelocity(time, gravity):
     # import pdb; pdb.set_trace()
     velocity = gravity * time
-
-    # define terminal velocity here
-    # FUTURE: find terminal velocity as a function of atmospheric density
-    # if (velocity > 56):
-    #     return 56
-
     return velocity
     # vi = gt
 
@@ -74,24 +62,29 @@ def main(altitude, iterator):
     loop_count = int(0)
 
     while (alt_counter > 0):
-        pass
+
         time_counter = CalculateTime(iterator, gravity_new, velocity_counter)
         time_total += time_counter
 
         alt_counter -= iterator
 
-        velocity_counter = CalculateVelocity(time_total, gravity_new)
+        velocity_counter += CalculateVelocity(time_counter, gravity_new)
+        terminal = TerminalV.main(alt_counter, gravity_new)
+        # define terminal velocity here
+        if velocity_counter > terminal:
+            velocity_counter = terminal
 
         gravity_new = CalculateGravity(alt_counter)
 
         loop_count += 1
 
-        if (loop_count % 1000 == 0):
+        if (loop_count % 10000 == 0):
             clear()
             print("Velocity: ", velocity_counter)
+            print("Terminal: ", terminal)
             print("Gravity:  ", gravity_new)
             print("Altitude: ", alt_counter)
-            print("Time:     ", time_total)
+            print("Time:     ", time_total, "\n")
 
     # import pdb; pdb.set_trace()
     PrintOut(altitude, iterator, time_total, velocity_counter, loop_count)
