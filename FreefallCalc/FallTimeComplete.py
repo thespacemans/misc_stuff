@@ -120,7 +120,7 @@ def main(altitude, iterator):
 
         loop_count += 1
 
-        modulo = 1000
+        modulo = 5000
         if iterator == 0.1:
             modulo = 10000
         elif iterator == 0.01:
