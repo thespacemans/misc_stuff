@@ -19,7 +19,7 @@ def FindTerminal(gravity, density):
     terminal_velocity = math.sqrt((2 * mass * gravity_constant)/(density * cross_area * drag_coeff))
     return terminal_velocity
 
-def main(alt_input, grav_input):
+def FindDensity(alt_input, grav_input):
     density_value = altitude_density[len(altitude_density) - 1][1]
     for r in range(0, len(altitude_density) - 1):
         if alt_input < altitude_density[r][0] and alt_input >= altitude_density[r+1][0]:
