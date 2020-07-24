@@ -1,6 +1,6 @@
-import sys
-import math
-from os import system, name
+import sys # handle arguments from coommand line
+from math import pow, sqrt # exponentials and square roots
+from os import system, name # attributes to update commandline display live
 
 # initialize globals
 # earth radius in meters (6.37 million)
@@ -37,7 +37,7 @@ def PrintOut(altitude, iterator, time, velocity, loops):
 
 # calculate gravity at new altitude
 def CalculateGravity(altitude):
-    gravity = gravity_const * math.pow((radius_earth / (radius_earth + altitude)), 2)
+    gravity = gravity_const * pow((radius_earth / (radius_earth + altitude)), 2)
     return gravity
     # gnew = g(re/re+h)^2
 
@@ -50,7 +50,7 @@ def CalculateVelocity(time, gravity):
 
 # calculate time taken to travel (iterator) given velocity
 def CalculateTime(i, g, v):
-    time = (((-v)+math.sqrt((2*i*g) + math.pow(v, 2)))/g)
+    time = (((-v)+sqrt((2*i*g) + pow(v, 2)))/g)
     return time
     # t = frac(-v+sqrt(2dg + v^2), g)
     # t = -frac(v+sqrt(2dg + v^2), g)
@@ -70,7 +70,7 @@ def FindDensity(alt_input):
 
 # calculate terminal velocity for given density and gravity
 def FindTerminal(gravity, density):
-    terminal_velocity = math.sqrt((2 * mass * gravity)/(density * cross_area * drag_coeff))
+    terminal_velocity = sqrt((2 * mass * gravity)/(density * cross_area * drag_coeff))
     return terminal_velocity
 # -------------------------------------------------------------------
 
@@ -120,13 +120,15 @@ def main(altitude, iterator):
 
         loop_count += 1
 
-        modulo = 5000
+
         if iterator == 0.1:
             modulo = 10000
         elif iterator == 0.01:
             modulo = 100000
         elif iterator == 0.001:
             modulo = 10000000
+        else:
+            modulo = 5000
 
         if (loop_count % modulo == 0):
             clear()
