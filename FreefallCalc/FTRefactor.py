@@ -52,7 +52,7 @@ def CalculateVelocity(time, gravity):
     return velocity
     # vi = gt
 
-# calculate time taken to travel (iterator) given velocity
+# calculate time taken to travel (iterator) given velocity and gravity 
 def CalculateTime(i, g, v):
     time = (((-v)+sqrt((2*i*g) + pow(v, 2)))/g)
     return time
@@ -82,6 +82,7 @@ def main(altitude_upper, altitude_lower, velocity_constant, iterator):
     # initialize user input here
     iterator = float(iterator) # cast str input to float
     altitude = float(altitude_upper) * 1000.0 # ensure this immutable input is correct
+    altitude_lower *= 1000.0 # convert km to meters
     alt_counter = altitude # altitude converted to meters
     gravity_new = CalculateGravity(alt_counter) # find gravity at current alt
     time_counter = float(0.0) # start at zero time
@@ -96,7 +97,6 @@ def main(altitude_upper, altitude_lower, velocity_constant, iterator):
 
     while (alt_counter > altitude_lower):
     # while (alt_counter > 250000):
-        # change 0 to whatever altitude you want to end at
         # e.g. 500 -> 250km, stop altitude at 250,000m
 
         time_counter = CalculateTime(iterator, gravity_new, velocity_counter)
@@ -119,9 +119,9 @@ def main(altitude_upper, altitude_lower, velocity_constant, iterator):
             # to fall 500km in 12 hours, you would need to travel
             # 500,000m in 43,200s or about 11.5 m/s
 
-        if 
-        velocity_counter = 11 # m/s, or 24.6 mph
-        # this should allow for a ~12hr fall from 500km
+        if velocity_constant != 0:
+            velocity_counter = velocity_constant # m/s, or 24.6 mph
+            # this should allow for a ~12hr fall from 500km
 
         gravity_new = CalculateGravity(alt_counter)
 
