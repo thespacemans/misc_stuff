@@ -129,7 +129,7 @@ def main(altitude_upper, altitude_lower, velocity_constant, iterator):
 
         if velocity_constant != 0:
             velocity_counter = velocity_constant # m/s, or 24.6 mph
-            this should allow for a ~12hr fall from 500km
+            # this should allow for a ~12hr fall from 500km
 
         gravity_new = CalculateGravity(alt_counter)
 
