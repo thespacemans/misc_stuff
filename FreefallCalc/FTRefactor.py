@@ -135,11 +135,11 @@ def main(altitude_upper, altitude_lower, velocity_constant, iterator):
 
         loop_count += 1
 
-        manipulate these modulo values to increase/decrease the "update rate" of the console output
-        their magnitude varies by the power of ten that the iterator is set at
-        this would be better to do programmatically, say, with a continuous function that ramps exponentially 
-        so that smaller iterators don't flicker more or less than larger ones, seemingly at random
-        surely there's a way to do this: find what refresh rate we want based on the number of ops we do per second
+        # manipulate these modulo values to increase/decrease the "update rate" of the console output
+        # their magnitude varies by the power of ten that the iterator is set at
+        # this would be better to do programmatically, say, with a continuous function that ramps exponentially 
+        # so that smaller iterators don't flicker more or less than larger ones, seemingly at random
+        # surely there's a way to do this: find what refresh rate we want based on the number of ops we do per second
         if iterator == 0.1:
             modulo = 50000
         elif iterator == 0.01:
@@ -147,7 +147,7 @@ def main(altitude_upper, altitude_lower, velocity_constant, iterator):
         elif iterator == 0.001:
             modulo = 1000000
         else:
-        modulo = 5000
+            modulo = 5000
  
         if (loop_count % modulo == 0):
             clear()
