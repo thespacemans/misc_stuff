@@ -3,7 +3,7 @@ import math
 veelo = float(0)
 gravoo = 9.8
 timeTot = 10
-timeInc = .01
+timeInc = 0.01
 
 i = 0
 while i != timeTot:

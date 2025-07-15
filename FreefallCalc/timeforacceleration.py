@@ -34,19 +34,18 @@ def main(iter, alt):
     # already in meters or fractions of meters
     iter = Decimal(iter)
 
-    inc_count = 0 # iteration counter for debugging
+    inc_count = 0  # iteration counter for debugging
 
-    alt_inc = alt # assign total altitude to counter variable
+    alt_inc = alt  # assign total altitude to counter variable
 
     grav_new = calcGravity(alt_inc)
 
-    time_inc = 0 # time increment in fractions of seconds
-    time_total = 0 # time totaled from increments
+    time_inc = 0  # time increment in fractions of seconds
+    time_total = 0  # time totaled from increments
 
+    vel_total = 0  # total velocity summed from acceleration operations
 
-    vel_total = 0 # total velocity summed from acceleration operations
-
-    while (alt_inc > 0):
+    while alt_inc > 0:
         # import pdb; pdb.set_trace() # start debug
 
         # find time taken to travel iter given grav_new
@@ -62,10 +61,11 @@ def main(iter, alt):
         # re-evaluate gravity at new altitude
         grav_new = calcGravity(alt_inc)
 
-        vel_total += (grav_new * time_inc)
+        vel_total += grav_new * time_inc
         inc_count += 1
 
     printOutput(alt, iter, time_total, vel_total)
+
 
 main(sys.argv[1], sys.argv[2])
 
